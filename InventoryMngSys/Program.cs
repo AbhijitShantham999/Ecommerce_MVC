@@ -1,10 +1,17 @@
 using InventoryMngSys.Data;
+using InventoryMngSys.Models;
+using InventoryMngSys.Repository;
+using InventoryMngSys.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+builder.Services.AddScoped<SignupAuthService>();
+builder.Services.AddScoped<LoginAuthService>();
 
 builder.Services.AddDbContext<AppDbContext>(
     option => option.UseSqlServer(
@@ -31,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=UserAuth}/{action=Signup}/{id?}");
 
 app.Run();

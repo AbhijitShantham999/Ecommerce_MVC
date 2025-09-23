@@ -8,7 +8,7 @@ namespace InventoryMngSys.Repository
         private readonly AppDbContext _context;
         private readonly DbSet<T> _entity;
 
-        public GenericRepo(AppDbContext context, DbSet<T> entity)
+        public GenericRepo(AppDbContext context)
         {
             _context = context;
             _entity = _context.Set<T>();
