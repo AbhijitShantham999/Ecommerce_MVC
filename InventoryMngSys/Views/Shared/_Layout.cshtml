@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - InventoryMngSys</title>
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+
+    <!-- Google Fonts CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+   
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="~/InventoryMngSys.styles.css" asp-append-version="true" />
@@ -18,36 +24,63 @@
         body{
             background-color: #0E1624;
             color: #99A1AF;
-            padding: 0 50px 0 50px;
+            font-family: "Roboto", sans-serif;
+            /* padding: 0 50px 0 50px; */
         }
     </style>
 </head>
 <body>
-    <nav class="h-[10vh] flex items-center justify-between border-b-2 border-solid border-[#99A1AF] px-4">
-        <div class="flex-1 "><h3 class="text-xl font-bold">⚡SwiftBuy⚡</h3></div>
-            <ul class="flex flex-1 space-x-8 justify-center ">
-                <li class="text-md font-bold">Home</li>
-                <li class="text-md font-bold">Shop</li>
-                <li class="text-md font-bold">Contact</li> 
-                <li class="text-md font-bold">About</li>
-                <li class="text-md font-bold">Admin</li>
-            </ul>
-        <div class="flex justify-end space-x-6 flex-1">
-            <i class="fas fa-shopping-cart pr-10"></i>
-            <i class="fas fa-user"></i> 
-        </div>
-        </nav>
-    <div class="min-h-[90vh]">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <div class="min-h-screen">
 
-    <footer class="h-[10vh] border-t border-[#99A1AF] py-4 mt-8">
-        <div class="container mx-auto text-center">
-            &copy; 2025 - SwiftBuy - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="hover:text-white transition">Privacy</a>
-        </div>
-    </footer>
+        <nav class="min-h-[15%] px-[2rem] py-[1rem] flex items-center justify-between border-b-2 border-solid border-[#99A1AF] px-4">
+            <div class="flex-1 "><h3 class="text-xl font-bold">⚡SwiftBuy⚡</h3></div>
+            <ul class="flex flex-1 space-x-8 justify-center ">
+                <li class="text-lg font-bold">Home</li>
+                <li class="text-lg font-bold">Shop</li>
+                <li class="text-lg font-bold">Contact</li>
+                <li class="text-lg font-bold">About</li>
+                <li class="text-lg font-bold">Admin</li>
+            </ul>
+            <div class="flex justify-end space-x-6 flex-1">
+                <div>
+                    <i class="fas fa-shopping-cart pr-10"></i>
+                </div>
+
+                <!-- User Info with Hover Tooltip -->
+                <div class="relative group">
+                    <div>
+                        <i class="fas fa-user text-lg"></i>
+                    </div>
+                    <div class="absolute text-white">
+                        <div>
+                            <div>
+                                <span>ID : </span>
+                                <span>@ViewBag.UserId</span>
+                            </div>
+                            <div>
+                                <span>Username : </span>
+                                <span>@ViewBag.Username</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+            <main role="main" class="pb-1">
+                @RenderBody()
+            </main>
+
+        <footer class=" py-4 border-t border-[#99A1AF]">
+            <div class="container mx-auto text-center">
+                &copy; 2025 - SwiftBuy - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="hover:text-white transition">Privacy</a>
+            </div>
+        </footer>
+
+
+    </div>
+    
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -15,7 +15,14 @@ namespace InventoryMngSys.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.GetString("Username") != null)
+            {
+                ViewBag.Username = HttpContext.Session.GetString("Username");
+                ViewBag.UserId = HttpContext.Session.GetString("UserId");
+                return View();
+            }
+            TempData["SessionTimeout"] = "Please Login to Continue";
+            return RedirectToAction("Login","UserAuth");
         }
 
         public IActionResult Privacy()

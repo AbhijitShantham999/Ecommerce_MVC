@@ -1,8 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+ @* Hero Page *@
+<div class=" w-full h-[90vh] relative">
+    <img class="w-full h-full object-cover brightness-50"
+         src="https://i.pinimg.com/1200x/87/bb/f5/87bbf5e30880956fb159b5416ab3662c.jpg" alt="Alternate Text" />
+</div>
 
-<div class="text-center">
-    <h1 class="text-xl">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@* New Arrival *@
+<div class="w-full h-[100vh] flex items-center p-[2rem]">
+    <div class="w-[50%] h-full">
+        <img class="w-full h-full object-cover brightness-50"
+             src="https://i.pinimg.com/736x/c0/23/40/c02340ab17ce1bcfaa190c476d599d02.jpg" alt="Alternate Text" />
+    </div>
+    <div class="w-[50%] h-full flex flex-col items-center justify-center gap-5">
+            <h1 class="text-center text-5xl ">New Arrival</h1>
+            <button class="text-white text-3xl border border-white border-2 p-2">
+                Explore Now
+            </button>
+    </div>
+</div>
+
+
+
+@* About Page *@
+<div class="p-[2rem] w-full h-[100vh] flex items-center gap-5">
+    <div class="w-[50%]">
+        <h1 class="text-center text-5xl font-bold mb-5">About</h1>
+        <p class="text-xl">
+            Founded in 2015, StyleHub began as a small boutique with a big vision: to make high-quality fashion accessible to everyone. 
+            What started as a single storefront has grown into a trusted online destination for thousands of fashion enthusiasts worldwide.
+        </p>
+        <p class="text-xl">
+            Our journey began when our founder, Sarah Mitchell, noticed a gap in the market for affordable yet stylish clothing that didn't compromise on quality. 
+            Frustrated with fast fashion's environmental impact and luxury brands' exclusivity, she set out to create something different.
+        </p>
+    </div>
+    <div class="w-[50%] h-full">
+        <img class="w-full h-full object-cover brightness-50"  
+            src="https://images.unsplash.com/photo-1708589794486-7767e6062c29?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHNob3BwaW5nJTIwdHNoaXJ0c3xlbnwwfHwwfHx8MA%3D%3D" alt="Alternate Text" />
+    </div>
+
 </div>

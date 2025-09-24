@@ -1,5 +1,4 @@
 using InventoryMngSys.Data;
-using InventoryMngSys.Models;
 using InventoryMngSys.Repository;
 using InventoryMngSys.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 builder.Services.AddScoped<SignupAuthService>();
 builder.Services.AddScoped<LoginAuthService>();
+
+//To use Session
+builder.Services.AddSession();
 
 builder.Services.AddDbContext<AppDbContext>(
     option => option.UseSqlServer(
@@ -29,6 +31,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

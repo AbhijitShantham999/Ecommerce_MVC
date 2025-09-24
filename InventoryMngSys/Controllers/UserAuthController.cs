@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InventoryMngSys.Models;
+//using Microsoft.AspNetCore.Http;
 using InventoryMngSys.Services;
-using InventoryMngSys.Models;
 using InventoryMngSys.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryMngSys.Controllers
 {
@@ -46,19 +48,23 @@ namespace InventoryMngSys.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM user) {
-
             if (ModelState.IsValid)
             {
                 var userExists = await _loginService.Login(user);
                 if (userExists != null)
                 {
-                    return RedirectToAction("Index","Home");
+                    //storing in session
+                    HttpContext.Session.SetString("Username", userExists.Username);
+                    HttpContext.Session.SetString("UserId", userExists.UserId.ToString());
+
+                    Console.WriteLine("Logged in Successfully");
+                    return RedirectToAction("Index", "Home");
                 }
+                TempData["Invalid"] = "Invalid Username or Password";
+                return View(user);
             }
             Console.WriteLine("Invalid Model, Please check form");
             return View(user);
         }
-
-
     }
 }
