@@ -25,6 +25,12 @@ namespace InventoryMngSys.Controllers
             return RedirectToAction("Login","UserAuth");
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login","UserAuth");
+        }
+
         public IActionResult Privacy()
         {
             return View();

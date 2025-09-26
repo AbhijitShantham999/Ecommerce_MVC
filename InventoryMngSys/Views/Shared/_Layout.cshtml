@@ -41,33 +41,48 @@
                 <li class="text-lg font-bold">About</li>
                 <li class="text-lg font-bold">Admin</li>
             </ul>
-            <div class="flex justify-end space-x-6 flex-1">
-                <div>
+            <div class="flex justify-end flex-1">
+                <div class="flex items-center">
                     <i class="fas fa-shopping-cart pr-10"></i>
                 </div>
 
                 <!-- User Info with Hover Tooltip -->
                 <div class="relative group">
-                    <div>
-                        <i class="fas fa-user text-lg"></i>
+                    <div class="mt-1 mr-8">
+                        <i class="fas fa-user text-lg cursor-pointer"></i>
                     </div>
-                    <div class="absolute text-white">
-                        <div>
-                            <div>
-                                <span>ID : </span>
-                                <span>@ViewBag.UserId</span>
-                            </div>
-                            <div>
-                                <span>Username : </span>
-                                <span>@ViewBag.Username</span>
-                            </div>
+                    <!-- ToolTip -->
+                    <div class="absolute top-12 right-0 z-10 invisible grid gap-2 p-5 text-white min-w-[180px] rounded-lg bg-black text-white
+                                group-hover:visible transition-all duration-300">
+                        <div class="flex justify-between items-center">
+                            <span>ID : </span>
+                            <span>@ViewBag.UserId</span>
+                        </div>
+                           <hr />
+                        <div class="flex justify-between items-center">
+                            <span>username :</span>
+                            <span>@ViewBag.Username</span>
                         </div>
                     </div>
-                </div>
 
+                    <!--Tooltip arrow-->
+                    <div class=" absolute top-10 right-15  z-[999] invisible group-hover:visible bg-black 
+                                w-4 h-4 transition-all duration-300 transform rotate-45"></div>
+
+                </div>
+                
+                @if (ViewBag.Username != null)
+                {
+                    <div>
+                        <button class="bg-red-800 text-white p-2 rounded-lg cursor-pointer"> <a asp-controller="Home" asp-action="Logout">Logout</a>  </button>
+                    </div>
+                }
+
+            
             </div>
         </nav>
-            <main role="main" class="pb-1">
+            
+        <main role="main" class="pb-1">
                 @RenderBody()
             </main>
 
