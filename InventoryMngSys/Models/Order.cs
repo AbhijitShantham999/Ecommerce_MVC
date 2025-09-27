@@ -10,6 +10,7 @@ namespace InventoryMngSys.Models
         [ForeignKey("User")]
         public int User_Id { get; set; }
         public string OrderStatus { get; set; }
+        public int TotalItems { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }

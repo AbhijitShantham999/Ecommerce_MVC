@@ -11,6 +11,12 @@ namespace InventoryMngSys.Models
         [Required(ErrorMessage = "Product Name Requried")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Description is Required")]
+        public string Description { get; set; }
+
+        [Required(ErrorMessage = "Image is Required")]
+        public string Image {  get; set; }
+
         [Required(ErrorMessage = "Product Price Requried")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater tha 0")]
         [Column(TypeName = "decimal(18,2)")]

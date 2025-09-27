@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 builder.Services.AddScoped<SignupAuthService>();
 builder.Services.AddScoped<LoginAuthService>();
+builder.Services.AddScoped<ProductServices>();
 
 //To use Session
 builder.Services.AddSession();
