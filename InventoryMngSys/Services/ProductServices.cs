@@ -18,5 +18,12 @@ namespace InventoryMngSys.Services
             var prod = await _productRepo.GetAllAsync();
             return prod;
         }
+
+        public async Task<Product> GetProdByID(int id)
+        {
+            var prod = await _productRepo.GetByIdAsync(id);
+            return prod;
+        }
+
     }
 }

@@ -21,5 +21,21 @@ namespace InventoryMngSys.Controllers
 
             return View(allProducts);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ProductDetails(int id)
+        {
+            var prod = await _prodServ.GetProdByID(id);
+
+            if (prod == null)
+            {
+                TempData["Invalid"] = "Id Not Found";
+                return View();
+            }
+
+            return View(prod);
+        }
+
+
     }
 }

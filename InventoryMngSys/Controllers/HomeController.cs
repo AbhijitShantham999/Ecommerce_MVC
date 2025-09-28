@@ -17,8 +17,6 @@ namespace InventoryMngSys.Controllers
         {
             if (HttpContext.Session.GetString("Username") != null)
             {
-                ViewBag.Username = HttpContext.Session.GetString("Username");
-                ViewBag.UserId = HttpContext.Session.GetString("UserId");
                 return View();
             }
             TempData["SessionTimeout"] = "Please Login to Continue";
