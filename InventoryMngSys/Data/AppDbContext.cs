@@ -15,6 +15,9 @@ namespace InventoryMngSys.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -46,6 +49,28 @@ namespace InventoryMngSys.Data
                 .WithMany(p => p.OrderItems)
                 .HasForeignKey(oi => oi.Product_id)
                 .OnDelete(DeleteBehavior.Restrict); // Changed from Cascade to Restrict
+
+            // 5. Product -> CartItem Relationship
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Product)
+                .WithMany(p => p.CartItems)
+                .HasForeignKey(ci => ci.ProductId)
+                .OnDelete(DeleteBehavior.Restrict); // Changed from Cascade to Restrict
+
+            // 6. Cart -> CartItem Relationship
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Cart)
+                .WithMany(c => c.CartItems)
+                .HasForeignKey(ci => ci.CartId)
+                .OnDelete(DeleteBehavior.Cascade); //  Delete Cart → Delete its CartItems
+
+            // USER ↔ CART  (One User has one Cart)
+            modelBuilder.Entity<Cart>()
+                .HasOne(c => c.User)                        // Cart belongs to one User
+                .WithOne(u => u.Cart)                     
+                .HasForeignKey<Cart>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);          // Delete User → Delete their Cart
+
 
             // Configure decimal precision
             modelBuilder.Entity<Product>()

@@ -38,5 +38,6 @@ namespace InventoryMngSys.Models
 
         //Relationship
         public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
     }
 }

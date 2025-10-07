@@ -4,6 +4,7 @@ using InventoryMngSys.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryMngSys.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251007072856_Cart_Entity_Added")]
+    partial class Cart_Entity_Added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,63 +24,6 @@ namespace InventoryMngSys.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("InventoryMngSys.Models.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
-
-                    b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Updated_At")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("InventoryMngSys.Models.CartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Updated_At")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartItems");
-                });
 
             modelBuilder.Entity("InventoryMngSys.Models.Order", b =>
                 {
@@ -246,36 +192,6 @@ namespace InventoryMngSys.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("InventoryMngSys.Models.Cart", b =>
-                {
-                    b.HasOne("InventoryMngSys.Models.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("InventoryMngSys.Models.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("InventoryMngSys.Models.CartItem", b =>
-                {
-                    b.HasOne("InventoryMngSys.Models.Cart", "Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InventoryMngSys.Models.Product", "Product")
-                        .WithMany("CartItems")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("InventoryMngSys.Models.Order", b =>
                 {
                     b.HasOne("InventoryMngSys.Models.User", "User")
@@ -317,11 +233,6 @@ namespace InventoryMngSys.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("InventoryMngSys.Models.Cart", b =>
-                {
-                    b.Navigation("CartItems");
-                });
-
             modelBuilder.Entity("InventoryMngSys.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -329,16 +240,11 @@ namespace InventoryMngSys.Migrations
 
             modelBuilder.Entity("InventoryMngSys.Models.Product", b =>
                 {
-                    b.Navigation("CartItems");
-
                     b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("InventoryMngSys.Models.User", b =>
                 {
-                    b.Navigation("Cart")
-                        .IsRequired();
-
                     b.Navigation("Orders");
 
                     b.Navigation("Products");

@@ -9,7 +9,7 @@ namespace InventoryMngSys.Models
 
         [Required(ErrorMessage = "Full Name is Required")]
         [StringLength(50,ErrorMessage = "Full Name Cannot Exceed 100 characters")]
-        public string FullName { get; set; }
+        public string FullName { get; set; }    
 
         [Required(ErrorMessage = "Username is Required")]
         [StringLength(50,ErrorMessage = "Username cannot exceed 100 characters")]
@@ -37,5 +37,7 @@ namespace InventoryMngSys.Models
         public ICollection<Product> Products { get; set; }
         [ValidateNever]
         public ICollection<Order> Orders { get; set; }
+        [ValidateNever]
+        public Cart Cart { get; set; }
     }
 }

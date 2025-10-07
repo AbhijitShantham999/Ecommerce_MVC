@@ -13,5 +13,7 @@ namespace InventoryMngSys.Repository
         Task<T> UpdateAsync(T model);
 
         Task<T> DeleteAsync(T model);
+
+        Task<bool> IsExists(int id);
     }
 }

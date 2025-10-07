@@ -52,5 +52,15 @@ namespace InventoryMngSys.Repository
             await _context.SaveChangesAsync();
             return model;
         }
+
+        public async Task<bool> IsExists(int id)
+        {
+            var existingID = await GetByIdAsync(id);
+            if (existingID != null) { 
+                return true;
+            }
+            return false;
+        }
+
     }
 }
