@@ -1,6 +1,7 @@
 ﻿using InventoryMngSys.Data;
 using InventoryMngSys.Models;
 using InventoryMngSys.Repository;
+using InventoryMngSys.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryMngSys.Services
@@ -44,6 +45,45 @@ namespace InventoryMngSys.Services
             int count = result.Count;
 
             return count;
+        }
+
+        public async Task<List<CartProductVM>> CartDetails(int id)
+        {
+            bool exists = await _cartRepo.IsExists(id);
+
+            if (!exists)
+            {
+                Console.WriteLine("ID Doesn't Exists");
+                throw new ArgumentException("ID Doesn't Exists");
+            }
+
+            var cartresult = _context.Carts
+                        .Join(_context.CartItems,
+                              cart => cart.CartId,
+                              item => item.CartId,
+                              (cart, item) => new
+                              {
+                                  Cart = cart,
+                                  CartItem = item
+                              });
+            var prodResult = await _context.Products
+                            .Join(cartresult,
+                                  p => p.ProductId,
+                                  cr => cr.CartItem.ProductId,
+                                  (p,cr) => new CartProductVM
+                                  {
+                                      Products = p,
+                                      CartItems = cr.CartItem,
+                                      Cart = cr.Cart
+                                  })
+                            .Where(i => i.Cart.UserId == id).ToListAsync();
+
+            if (prodResult != null)
+            {
+                return prodResult;
+            }
+            return null;
+
         }
 
     }

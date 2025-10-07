@@ -1,0 +1,62 @@
+﻿@model IEnumerable<InventoryMngSys.ViewModels.CartProductVM>;
+
+ @if(Model != null){
+        <div class="px-[2rem] min-h-[80vh]">
+            <div class="my-[1rem]">
+                <h1 class="text-3xl"> Cart Details</h1>
+            </div>
+            <table class="table-auto w-full border-collapse">
+                <thead>
+                    <tr class="text-left">
+                        <th class="px-4 py-2">Product</th>
+                        <th class="px-4 py-2 text-lg">Name</th>
+                        <th class="px-4 py-2 text-lg">Price</th>
+                        <th class="px-4 py-2 text-lg">Quantity</th>
+                        <th class="px-4 py-2 text-lg">Total</th>
+                        <th class="px-4 py-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cp in Model)
+                    {
+                        <tr class="border-b hover:bg-[#F0F0F0]">
+                            <td class="px-4 py-2">
+                                <div class="w-[80px] h-[80px] bg-green-500 flex items-center justify-center">
+                                    <img class="w-full h-full object-cover"
+                                         src="https://bluorng.com/cdn/shop/files/uonjlni_k_91abe0dc-746d-45c1-88a1-d8653958b415.jpg?v=1759242390&width=1346"
+                                         alt="Alternate Text" />
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 align-middle">
+                                <h3 class="text-base">@cp.Products.Name</h3>
+                            </td>
+                            <td class="px-4 py-2 align-middle">
+                                <h3 class="text-base">₹ @cp.Products.Price</h3>
+                            </td>
+                            <td class="px-4 py-2 align-middle">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-minus text-white bg-black cursor-pointer"></i>
+                                    <h3>@cp.CartItems.Quantity</h3>
+                                    <i class="fa-solid fa-plus text-white bg-black cursor-pointer"></i>
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 align-middle">
+                                <h3 class="text-base font-semibold">₹@cp.Products.Price*@cp.CartItems.Quantity</h3>
+                            </td>
+                            <td class="px-4 py-2 align-middle">
+                                <i class="fa-solid fa-trash text-red-500 cursor-pointer"></i>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+ }
+else
+{
+    <div class="min-h-[80vh] grid items-center">
+        <h1 class="text-center text-5xl text-gray-500">No Items In Cart :( </h1>
+    </div>
+}
+
+
