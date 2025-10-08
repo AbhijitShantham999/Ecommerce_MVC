@@ -38,12 +38,27 @@ namespace InventoryMngSys.Repository
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _entity.ToListAsync();
+            try
+            {
+                return await _entity.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($" GenericRepo-GetAllAsync-Error : {ex.Message}");
+                return Enumerable.Empty<T>();
+            }
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _entity.FindAsync(id);
+            try
+            {
+                return await _entity.FindAsync(id);
+            }
+            catch (Exception ex) {
+
+                return null;
+            } 
         }
 
         public async Task<T> UpdateAsync(T model)

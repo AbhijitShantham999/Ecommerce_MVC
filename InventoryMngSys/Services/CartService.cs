@@ -49,6 +49,7 @@ namespace InventoryMngSys.Services
 
         public async Task<List<CartProductVM>> CartDetails(int id)
         {
+            Console.WriteLine($"Id param in cartdetails(cartService) : {id} ");
             bool exists = await _cartRepo.IsExists(id);
 
             if (!exists)

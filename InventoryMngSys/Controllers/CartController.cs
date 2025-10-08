@@ -14,13 +14,14 @@ namespace InventoryMngSys.Controllers
 
         public async Task<IActionResult> CartDetails()
         {
-            var res = HttpContext.Session.GetString("Userid");
-            Console.WriteLine($"Stored: {res}");
+            var res = HttpContext.Session.GetString("UserId");
+            Console.WriteLine($"CartController - CartDetails - res(userid): {res}");
             if (res == null)
             {
                 return View(); 
             }
             int id = int.Parse(res);
+            Console.WriteLine($"Id in Cart Controller : {id}");
             var cartdto = await _cartServ.CartDetails(id);
 
             if (cartdto == null)

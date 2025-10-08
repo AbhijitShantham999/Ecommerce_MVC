@@ -20,7 +20,9 @@ namespace InventoryMngSys.Controllers
             if (HttpContext.Session.GetString("Username") != null)
             {
                 var userid = HttpContext.Session.GetString("UserId");
+                Console.WriteLine($"Home Controller - Index - userid : {userid}");
                 int id = int.Parse(userid);
+                Console.WriteLine($"Home Controller - Index - Parsed(userid) : {id}");
                 int count = await _cartServ.CartItemCount(id);
                 Console.WriteLine($"Cart Count : {count}");
                 ViewBag.cartCount = count;
